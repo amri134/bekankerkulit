@@ -24,8 +24,8 @@ async function predictClassification(model, image) {
       result = "Cancer";
       suggestion = "Segera periksa ke dokter!";
     } else {
-      result = "Non-Cancer";
-      suggestion = "Segera konsultasi dengan dokter terdekat jika ukuran semakin membesar dengan cepat, mudah luka, atau berdarah.";
+      result = "Non-cancer";
+      suggestion = "Penyakit kanker tidak terdeteksi.";
     }
 
     const id = uuidv4();
