@@ -10,6 +10,6 @@ COPY . .
 
 ENV PORT=3000
 
-ENV MODEL_URL=https://storage.googleapis.com/submissionmlgc-hajijinamri/model-in-prod/model.json
+ENV MODEL_URL=https://storage.googleapis.com/submissionmlgc-cintiaputripras/model-in-prod/model.json
 
 CMD ["npm", "start"]

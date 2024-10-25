@@ -10,23 +10,31 @@ async function predictClassification(model, image) {
   try {
     const tensor = tf.node
       .decodeJpeg(image)
-      .resizeNearestNeighbor([224, 224]) // Sesuaikan ukuran jika diperlukan
+      .resizeNearestNeighbor([224, 224])
       .expandDims()
       .toFloat();
 
     const prediction = model.predict(tensor);
-    const score = await prediction.data(); // Ambil array nilai prediksi
-    const confidenceScore = score[0] * 100; // Nilai prediksi pertama sebagai probabilitas Cancer
+    const score = await prediction.data();
+    const confidenceScore = Math.max(...score) * 100;
+
+   const label = classResult > 0 ? 'Cancer' : 'Non-cancer';
+
+
+
 
     let result, suggestion;
 
-    if (confidenceScore > 50) {
-      result = "Cancer";
-      suggestion = "Segera periksa ke dokter!";
-    } else {
-      result = "Non-cancer";
-      suggestion = "Penyakit kanker tidak terdeteksi.";
-    }
+
+
+
+   if (confidenceScore > 50) {
+     result = "Cancer";
+    suggestion = "Segera periksa ke dokter!";
+   } else {
+     result = "Non-cancer";
+     suggestion = "Penyakit kanker tidak terdeteksi.";
+  }
 
     const id = uuidv4();
     const createdAt = new Date().toISOString();
